@@ -1,21 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+import RestaurentsScreen from "./src/screens/Restaurents.screen";
+import { MySafeAreaView } from "./src/styles/stylessheet";
+import {
+  useFonts as useInter,
+  Inter_400Regular,
+} from "@expo-google-fonts/inter";
+import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 
 export default function App() {
+  const [latoLoaded] = useLato({
+    Lato_400Regular,
+  });
+  const [interLoaded] = useInter({
+    Inter_400Regular,
+  });
+  if (!latoLoaded || !interLoaded) return null;
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <MySafeAreaView>
+        <RestaurentsScreen />
+      </MySafeAreaView>
+      <ExpoStatusBar style='auto' />
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
